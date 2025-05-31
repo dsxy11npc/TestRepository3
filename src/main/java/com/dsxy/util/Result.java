@@ -1,9 +1,14 @@
 package com.dsxy.util;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 统一响应结果
  * @param <T> 响应数据类型
  */
+@Getter
+@Setter
 public class Result<T> {
     /** 响应码 */
     private Integer code;
@@ -66,42 +71,5 @@ public class Result<T> {
         result.setCode(code);
         result.setMessage(message);
         return result;
-    }
-
-    /**
-     * Getter
-     * Setter
-     */
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
     }
 }
