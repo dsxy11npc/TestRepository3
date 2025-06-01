@@ -1,5 +1,6 @@
 package com.dsxy.dao;
 
+import com.dsxy.model.Student;
 import com.dsxy.model.Teacher;
 
 import java.util.List;
@@ -48,4 +49,5 @@ public interface TeacherDao {
      * @return 受影响行数
      */
     int insertMore(List<Teacher> teachers);
+
 }

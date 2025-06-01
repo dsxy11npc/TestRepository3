@@ -1,14 +1,18 @@
 package com.dsxy.controller;
 
+import com.dsxy.dao.DepartmentDao;
 import com.dsxy.dao.MajorDao;
 import com.dsxy.dao.StudentDao;
 import com.dsxy.dao.TeacherDao;
+import com.dsxy.dao.impl.DepartmentTable;
 import com.dsxy.dao.impl.MajorTable;
 import com.dsxy.dao.impl.StudentTable;
 import com.dsxy.dao.impl.TeacherTable;
+import com.dsxy.model.Department;
 import com.dsxy.model.Major;
 import com.dsxy.model.Student;
 import com.dsxy.model.Teacher;
+import com.dsxy.util.PasswordUtil;
 import com.dsxy.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +30,9 @@ public class ManagerController {
     @PutMapping(value="/putTeacher",headers="content-type=application/json")
     public Result<Teacher> addTeacher(@RequestBody Teacher teacher) {
         TeacherDao teacherDao=new TeacherTable();
+        //加密密码
+        String hashPassword= PasswordUtil.hashPassword(teacher.getPassword());
+        teacher.setPassword(hashPassword);
         //受影响行数判断是否添加成功
         if(teacherDao.insert(teacher)>0){
             return Result.success(teacher);
@@ -38,6 +45,11 @@ public class ManagerController {
     @PutMapping(value="/putMoreTeacher",headers="content-type=application/json")
     public Result<List<Teacher>> addTeacherMore(@RequestBody List<Teacher> teachers) {
         TeacherDao teacherDao=new TeacherTable();
+        //批量加密密码
+        for (Teacher teacher : teachers) {
+            String hashPassword= PasswordUtil.hashPassword(teacher.getPassword());
+            teacher.setPassword(hashPassword);
+        }
         //受影响行数判断是否添加成功
         if(teacherDao.insertMore(teachers)>0){
             return Result.success(teachers);
@@ -50,6 +62,9 @@ public class ManagerController {
     @PostMapping(value="/postTeacher",headers="content-type=application/json")
     public Result<Teacher> modifyTeacher(@RequestBody Teacher teacher) {
         TeacherDao teacherDao=new TeacherTable();
+        //加密密码
+        String hashPassword= PasswordUtil.hashPassword(teacher.getPassword());
+        teacher.setPassword(hashPassword);
         //受影响行数判断是否添加成功
         if(teacherDao.update(teacher)>0){
             return Result.success(teacher);
@@ -100,6 +115,9 @@ public class ManagerController {
     @PutMapping(value="/putStudent",headers="content-type=application/json")
     public Result<Student> addStudent(@RequestBody Student student) {
         StudentDao studentDao=new StudentTable();
+        //加密密码
+        String hashPassword= PasswordUtil.hashPassword(student.getPassword());
+        student.setPassword(hashPassword);
         //受影响行数判断是否添加成功
         if(studentDao.insert(student)>0){
             return Result.success(student);
@@ -112,6 +130,11 @@ public class ManagerController {
     @PutMapping(value="/putMoreStudent",headers="content-type=application/json")
     public Result<List<Student>> addStudentMore(@RequestBody List<Student> students) {
         StudentDao studentDao=new StudentTable();
+        //批量加密密码
+        for (Student student : students) {
+            String hashPassword= PasswordUtil.hashPassword(student.getPassword());
+            student.setPassword(hashPassword);
+        }
         //受影响行数判断是否添加成功
         if(studentDao.insertMore(students)>0){
             return Result.success(students);
@@ -124,6 +147,9 @@ public class ManagerController {
     @PostMapping(value="/postStudent",headers="content-type=application/json")
     public Result<Student> modifyStudent(@RequestBody Student student) {
         StudentDao studentDao=new StudentTable();
+        //加密密码
+        String hashPassword= PasswordUtil.hashPassword(student.getPassword());
+        student.setPassword(hashPassword);
         //受影响行数判断是否添加成功
         if(studentDao.update(student)>0){
             return Result.success(student);
@@ -156,7 +182,7 @@ public class ManagerController {
             return Result.error(ERROR,"查询失败");
         }
     }
-    //查询全部教师
+    //查询全部学生
     @GetMapping(value="/getAllStudent",headers="content-type=application/json")
     public Result<List<Student>> getStudentAll() {
         StudentDao studentDao=new StudentTable();
@@ -164,6 +190,68 @@ public class ManagerController {
         List<Student> students=studentDao.selectAll();
         if(students!=null){
             return Result.success(students);
+        }else{
+            return Result.error(ERROR,"查询失败");
+        }
+    }
+
+    //添加院系
+    @PutMapping(value="/putDepartment",headers="content-type=application/json")
+    public Result<Department> addDepartment(@RequestBody Department department) {
+        DepartmentDao departmentDao=new DepartmentTable();
+        //受影响行数判断是否添加成功
+        if(departmentDao.insert(department)>0){
+            return Result.success(department);
+        }else{
+            return Result.error(ERROR,"添加失败");
+        }
+    }
+
+    //修改院系
+    @PostMapping(value="/postDepartment",headers="content-type=application/json")
+    public Result<Department> modifyDepartment(@RequestBody Department department) {
+        DepartmentDao departmentDao=new DepartmentTable();
+        //受影响行数判断是否添加成功
+        if(departmentDao.update(department)>0){
+            return Result.success(department);
+        }else{
+            return Result.error(ERROR,"修改失败");
+        }
+    }
+
+    //删除院系
+    @DeleteMapping(value="/deleteDepartment",headers="content-type=application/json")
+    public Result<Department> deleteDepartmentDao(String id) {
+        DepartmentDao departmentDao=new DepartmentTable();
+        //受影响行数判断是否添加成功
+        if(departmentDao.delete(id)>0){
+            return Result.success();
+        }else{
+            return Result.error(ERROR,"删除失败");
+        }
+    }
+
+    //查询全部院系
+    @GetMapping(value="/getAllDepartment",headers="content-type=application/json")
+    public Result<List<Department>> getDepartmentAll() {
+        DepartmentDao departmentDao=new DepartmentTable();
+        //对象是否为空判断是否操作成功
+        List<Department> departments=departmentDao.selectAll();
+        if(departments!=null){
+            return Result.success(departments);
+        }else{
+            return Result.error(ERROR,"查询失败");
+        }
+    }
+
+    //查询院系
+    @GetMapping(value="/getDepartment",headers="content-type=application/json")
+    public Result<Department> getDepartment(String id) {
+        DepartmentDao departmentDao=new DepartmentTable();
+        //对象是否为空判断是否操作成功
+        Department department=departmentDao.selectByDepartmentId(id);
+        if(department!=null){
+            return Result.success(department);
         }else{
             return Result.error(ERROR,"查询失败");
         }
@@ -230,5 +318,4 @@ public class ManagerController {
             return Result.error(ERROR,"查询失败");
         }
     }
-
 }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 public class Department {
     /** 主键id */
-    private Integer id;
+    private Long id;
     /** 院系编号 */
     private String departmentNo;
     /** 院系名 */

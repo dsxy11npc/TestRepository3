@@ -48,4 +48,17 @@ public interface StudentDao {
      */
     int insertMore(List<Student> students);
 
+    /**
+     * 选择的课
+     * @param studentNo 学生学号
+     * @return 所选课程
+     */
+    List<Course> selectCourseByStudentNo(String studentNo);
+
+    /**
+     * 选课
+     * @param studentNo 学生学号
+     * @return 学生对象
+     */
+    int choiceCourse(String studentNo,String choice);
 }

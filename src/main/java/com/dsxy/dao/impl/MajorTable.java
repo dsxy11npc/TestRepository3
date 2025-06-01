@@ -28,7 +28,7 @@ public class MajorTable extends BaseDao implements MajorDao {
         }
 
     }
-
+    //查询单个专业
     @Override
     public Major selectByMajorId(String id) {
         String sql ="select id,major_no majorNo,major_name majorName,department_id departmentId," +

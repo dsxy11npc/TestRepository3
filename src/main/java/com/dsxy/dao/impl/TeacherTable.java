@@ -3,6 +3,7 @@ package com.dsxy.dao.impl;
 import com.dsxy.dao.BaseDao;
 import com.dsxy.dao.TeacherDao;
 import com.dsxy.model.Course;
+import com.dsxy.model.Student;
 import com.dsxy.model.Teacher;
 
 import java.sql.SQLException;
@@ -79,4 +80,6 @@ public class TeacherTable extends BaseDao implements TeacherDao {
         }
         return allRow;
     }
+
+
 }

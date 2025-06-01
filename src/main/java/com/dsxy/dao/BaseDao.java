@@ -1,5 +1,7 @@
 package com.dsxy.dao;
 
+import com.dsxy.model.Student;
+import com.dsxy.model.Teacher;
 import com.dsxy.util.JDBCUtil;
 
 import java.lang.reflect.Field;
@@ -104,4 +106,5 @@ public class BaseDao {
         }
         return list.getFirst();
     }
+
 }

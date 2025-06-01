@@ -21,4 +21,6 @@ public class Student{
     private String name;
     /** 联系电话 */
     private String phone;
+    /** 选择的课 */
+    private String choice;
 }
