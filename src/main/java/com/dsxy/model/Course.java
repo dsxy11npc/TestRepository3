@@ -25,7 +25,7 @@ public class Course {
     /** 课程性质(1-必修,2-选修) */
     private Integer courseType;
     /** 学分 */
-    private Integer credit;
+    private BigDecimal credit;
     /** 是否公开(0-否,1-是) */
     private Integer isPublic;
     /** 课程状态(1-已提交,2-审核通过,3-审核不通过,4-公开,5-隐藏) */

@@ -19,7 +19,7 @@ public interface CourseDao {
      * @param courseNo 主键列
      * @return 单个课程
      */
-    Course selectByTeachId(String courseNo);
+    Course selectByCourseNo(String courseNo);
 
     /**
      * 新增一条课程数据
@@ -41,4 +41,12 @@ public interface CourseDao {
      * @return 受影响行数
      */
     int delete(String courseNo);
+
+
+    /**
+     * 修改课程状态
+     * @param courseNo 课程编号
+     * @return 受影响行数
+     */
+    int updateStatus(String courseNo,Integer status);
 }

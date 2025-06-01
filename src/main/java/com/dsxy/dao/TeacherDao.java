@@ -5,7 +5,7 @@ import com.dsxy.model.Teacher;
 import java.util.List;
 
 /**
- * 教师表的增删改查
+ * 专业表的增删改查
  */
 public interface TeacherDao {
     /**
@@ -42,4 +42,10 @@ public interface TeacherDao {
      */
     int delete(String TeachNo);
 
+    /**
+     * 批量添加教师
+     * @param teachers 教师链表
+     * @return 受影响行数
+     */
+    int insertMore(List<Teacher> teachers);
 }
